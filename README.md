@@ -6,7 +6,7 @@ Your document is provided and formatted for easy consumption, and gets cached in
 
 ## Example request
 
-`GET https://feature-toggles-get.YOUR_ZONE.workers.dev/`
+`GET https://workers-sheets-toggles.YOUR_ZONE.workers.dev/`
 
 ```
 [
