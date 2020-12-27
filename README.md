@@ -52,7 +52,7 @@ Make sure to remove any excess columns and rows as well.
 
 ### Cloudflare (Wrangler + KV)
 
-![Cloudflare setup](docs/cloudflare.png)
+![Cloudflare setup](docs/cloudflare-setup.png)
 
 Since this uses [Cloudflare Workers](https://workers.cloudflare.com) and [KV](https://www.cloudflare.com/products/workers-kv/), you need to have a Cloudflare account.
 
