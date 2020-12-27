@@ -1,6 +1,6 @@
 # Feature toggles engine on Google Sheets and Cloudflare Workers with KV edge-side storage
 
-You wanted the fastest, you got the fastest! What feature toggles engine has always been right under your nose, dead easy to use and free? Google Sheets of course. And what's the fastest serverless functions service today? Cloudflare Workers, of course. So like pairing vanilla and chocolate, this repo demonstrates how you can combine these brilliant services to finally implement those feature toggles you never got around adding.
+You wanted the fastest, you got the fastest! What feature toggles engine has always been right under your nose, dead easy to use and free? Google Sheets, of course. And what's the fastest serverless functions service today? Cloudflare Workers, of course. So like pairing vanilla and chocolate, this repo demonstrates how you can combine these brilliant services to finally implement those feature toggles you never got around adding.
 
 Your document is provided and formatted for easy consumption, and gets cached in Cloudflare Workers KV as long as you like (default 60 seconds). A normal non-cached request takes around ~500-1000 ms for me, and a cached request clocks in around ~30ms on my end.
 
