@@ -4,6 +4,25 @@ You wanted the fastest, you got the fastest! What feature toggles engine has alw
 
 Your document is provided and formatted for easy consumption, and gets cached in Cloudflare Workers KV as long as you like (default 60 seconds). A normal non-cached request takes around ~500-1000 ms for me, and a cached request clocks in around ~30ms on my end.
 
+## Example request
+
+`GET https://feature-toggles-get.YOUR_ZONE.workers.dev/`
+
+```
+[
+  {
+    "Key": "featureNewCheckoutFlow",
+    "Value": "true",
+    "Groups": "Developers, UAT"
+  },
+  {
+    "Key": "rolloutPercentageNewButton",
+    "Value": "50",
+    "Groups": "Public"
+  }
+]
+```
+
 ## Prerequisites
 
 ### Google Sheets
