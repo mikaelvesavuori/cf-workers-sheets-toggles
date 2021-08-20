@@ -1,4 +1,6 @@
-const DOCUMENT_ID = DOC_ID;
+const DOCUMENT_ID = ''; // <-- EDIT THIS!
+const GOOGLE_SHEET_NAME = ''; // <-- EDIT THIS!
+
 const SHEET_NAME = GOOGLE_SHEET_NAME.replace(/ /g, '%20'); // Replace spaces with URL encoding fix
 const URL = `https://docs.google.com/spreadsheets/d/${DOCUMENT_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
 
@@ -32,7 +34,7 @@ async function getSheetsToggles(request) {
   console.log('Call took', timeEnd - timeStart, 'ms');
 
   // Return data
-  if (typeof responseData !== "string") responseData = JSON.stringify(responseData)
+  if (typeof responseData !== 'string') responseData = JSON.stringify(responseData);
   return new Response(responseData, {
     'Content-Type': 'application/json',
     status: 200
@@ -62,7 +64,7 @@ async function getData(url, documentId) {
     .then((res) => res.replace('/*O_o*/\ngoogle.visualization.Query.setResponse(', ''))
     .then((res) => res.slice(0, res.length - 2))
     .then((res) => JSON.parse(res))
-    .then((res) => res.table)
+    .then((res) => res.table);
 
   responseData = formatData(responseData);
   await cacheData(documentId, responseData);

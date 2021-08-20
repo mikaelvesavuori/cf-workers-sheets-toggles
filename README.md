@@ -6,7 +6,7 @@ Your document is provided and formatted for easy consumption, and gets cached in
 
 ## Example request
 
-`GET https://workers-sheets-toggles.YOUR_ZONE.workers.dev/`
+`GET https://cf-workers-sheets-toggles.{{YOUR_ZONE}}.workers.dev/`
 
 ```
 [
@@ -29,7 +29,19 @@ Your document is provided and formatted for easy consumption, and gets cached in
 
 You will need a basic Google Sheets document before moving on to the Cloudflare bits. The document has to be public for any of this to work.
 
-The function will request a Google Sheet with your own values as per `https://docs.google.com/spreadsheets/d/{{DOC_ID}}/gviz/tq?tqx=out:json&sheet={{GOOGLE_SHEETS_NAME}}`.
+**To share it, in Google Sheets click the upper-right `Share` button and edit sharing settings to `Anyone with the link`.**
+
+The function, when working, will request a Google Sheet with your own values as per `https://docs.google.com/spreadsheets/d/{{DOC_ID}}/gviz/tq?tqx=out:json&sheet={{GOOGLE_SHEETS_NAME}}`.
+
+So we need two bits of information, which you will need to put in `index.js`.
+
+#### 1) Get your document ID
+
+It's the long random-looking snippet between the `https://docs.google.com/spreadsheets/d/` and `/edit#...` sections. Replace `DOCUMENT_ID` in `index.js` with that value.
+
+#### 2) Get your document name
+
+Simple. It's just that: your document name! Replace `GOOGLE_SHEET_NAME` in `index.js` with that value.
 
 #### Be careful about formatting!
 
@@ -41,10 +53,10 @@ It's normally a pain to combine types in the same column and get them out correc
 
 I'll guide you to my proposed way of setting up the document (and this should work, as this is what I've tested and built against). I tend to set things like so:
 
-- Horizontal align everything
-- Vertical align everything
+- Horizontally left-align everything
+- Vertically top-align everything
 - Wrap everything
-- Set all to Format > Number > Plain text
+- Set all cells to `Format` > `Number` > `Plain text` so we don't get any unnecessary formatting
 
 Make sure to remove any excess columns and rows as well.
 
@@ -58,20 +70,19 @@ Since this uses [Cloudflare Workers](https://workers.cloudflare.com) and [KV](ht
 
 I assume you have [Wrangler](https://github.com/cloudflare/wrangler) installed.
 
-Also make sure to set all the empty fields to your own values inside of `wrangler.toml`. It's OK to have spaces in your name, the function will replace them with `%20`. Once you run the init script you will receive values for `kv-namespaces` that you can plug in into the TOML file.
+Also make sure to set all the empty fields to your own values inside of `wrangler.toml`, replacing `account_id` and `zone_id`. Once you have run the `init` script you will receive values (`binding`, `id`, `preview_id`) for `[[kv-namespaces]]` that you can also plug in into the TOML file.
 
 ## Develop and test
 
-Run `wrangler dev`. You can also just log into Cloudflare and use the "quick edit" view for any development work.
+Run `npm start` or `wrangler dev`. You can also just log into Cloudflare and use the "quick edit" view for any development work.
 
 ## Deployment
 
 I've added a few helpers in `package.json`:
 
-- `init`: Create Cloudflare resources (KV, function, env vars)
-- `deploy`: Deploy with Wrangler or just do `wrangler publish`
-
-Run these like you would run any regular NPM stuff, eg. `npm run deploy`.
+- (npm run) `init`: Create Cloudflare resources (KV, function, env vars)
+- (npm) `deploy`: Deploy with Wrangler (alias for `wrangler publish`)
+- (npm) `start`: Run functions locally (alias for `wrangler dev`)
 
 ## Resources
 
